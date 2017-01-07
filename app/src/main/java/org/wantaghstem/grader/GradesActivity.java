@@ -106,37 +106,9 @@ public class GradesActivity extends Activity {
 
                             // YOUR CODE SHOULD GO BETWEEN HERE
 
-                            if (predictTotalInt > 0 && predictTotalGrade >= 0) {
+                            //////////
 
-                                double numberNeeded = 0;
-                                double gradeWantedDouble = Double.parseDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""));
-                                int predictedTotalInt = Integer.parseInt(predictTotal.getText().toString());
-
-                                numberNeeded = (gradeWantedDouble / 100) * (runningTotal + predictedTotalInt) - (runningCorrect);
-
-                                DecimalFormat f = new DecimalFormat("##.00");
-
-                                SingleGrade tempgrade = new SingleGrade();
-                                tempgrade.setPointsRight((int) numberNeeded);
-                                tempgrade.setTotalPoints(predictedTotalInt);
-
-                                Toast.makeText(getApplicationContext(),
-                                        "The points you would need would be:  " + f.format(numberNeeded) +
-                                                ". The percentage you would need on the test would be a: " + tempgrade.getPercentage(),
-                                        Toast.LENGTH_LONG).show();
-
-                                predictDialog.dismiss();
-
-                            } else {
-                                if (predictTotalGrade < 0) {
-                                    Toast.makeText(getApplicationContext(), "Nice try but you can't have a negative grade :) .",
-                                            Toast.LENGTH_LONG).show();
-                                } else if (predictTotalInt <= 0) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Nice try but you can't have an assignment which is worth less than or equal to 0 points :) .",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            }
+                            // AND HERE
                         }
                     }
                 });
