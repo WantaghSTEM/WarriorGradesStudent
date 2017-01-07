@@ -93,7 +93,7 @@ public class GradesActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         // This line checks to make sure the user filled out the form correctly
-                        if(!gradeWanted.getText().toString().isEmpty() && !predictTotal.getText().toString().isEmpty() && isNumericDouble(predictTotal.getText().toString().trim().replaceAll("\\s+","")) && isNumericDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""))){
+                        if(!gradeWanted.getText().toString().isEmpty() && !predictTotal.getText().toString().isEmpty() && isNumericDouble(predictTotal.getText().toString().trim().replaceAll("\\s+","")) && isNumericDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""))) {
 
                             // This one is the number we put in the first box
                             double predictTotalInt = Double.parseDouble(predictTotal.getText().toString());
@@ -102,24 +102,47 @@ public class GradesActivity extends Activity {
                             double predictTotalGrade = Double.parseDouble(gradeWanted.getText().toString());
 
                             // This is how we make some text show up on the bottom of the screen
-                            Toast.makeText(getApplicationContext(),"Oh no we haven't implemented this yet!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Oh no we haven't implemented this yet!", Toast.LENGTH_LONG).show();
 
                             // YOUR CODE SHOULD GO BETWEEN HERE
 
-                            ////////////////
+                            if (predictTotalInt > 0 && predictTotalGrade >= 0) {
 
-                            // AND HERE
-                            
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Please fill out all the fields properly",
-                                    Toast.LENGTH_SHORT).show();
+                                double numberNeeded = 0;
+                                double gradeWantedDouble = Double.parseDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""));
+                                int predictedTotalInt = Integer.parseInt(predictTotal.getText().toString());
+
+                                numberNeeded = (gradeWantedDouble / 100) * (runningTotal + predictedTotalInt) - (runningCorrect);
+
+                                DecimalFormat f = new DecimalFormat("##.00");
+
+                                SingleGrade tempgrade = new SingleGrade();
+                                tempgrade.setPointsRight((int) numberNeeded);
+                                tempgrade.setTotalPoints(predictedTotalInt);
+
+                                Toast.makeText(getApplicationContext(),
+                                        "The points you would need would be:  " + f.format(numberNeeded) +
+                                                ". The percentage you would need on the test would be a: " + tempgrade.getPercentage(),
+                                        Toast.LENGTH_LONG).show();
+
+                                predictDialog.dismiss();
+
+                            } else {
+                                if (predictTotalGrade < 0) {
+                                    Toast.makeText(getApplicationContext(), "Nice try but you can't have a negative grade :) .",
+                                            Toast.LENGTH_LONG).show();
+                                } else if (predictTotalInt <= 0) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Nice try but you can't have an assignment which is worth less than or equal to 0 points :) .",
+                                            Toast.LENGTH_LONG).show();
+                                }
+                            }
                         }
                     }
                 });
-
-
             }
         });
+
         myPredictCovering.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
