@@ -1,4 +1,4 @@
-package me.anuraag.grader;
+package org.wantaghstem.grader;
 
 import java.io.Serializable;
 
