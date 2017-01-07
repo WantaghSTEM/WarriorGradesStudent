@@ -32,7 +32,7 @@
         android:background="@drawable/flat_selector"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:visibility="gone"/>
+        android:visibility="gon"/>
 
     <ImageView
         android:id="@+id/imageView"
