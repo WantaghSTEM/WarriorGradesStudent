@@ -1,6 +1,4 @@
-package me.anuraag.grader;
-
-import java.text.DecimalFormat;
+package org.wantaghstem.grader;
 
 /**
  * Created by Anuraag on 12/25/14.

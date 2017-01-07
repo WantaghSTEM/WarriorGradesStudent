@@ -1,4 +1,4 @@
-package me.anuraag.grader;
+package org.wantaghstem.grader;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashSet;
 import java.util.Set;
