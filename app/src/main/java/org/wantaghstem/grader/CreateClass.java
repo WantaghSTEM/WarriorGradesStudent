@@ -48,18 +48,18 @@ public class CreateClass extends Activity {
         mCustomView = mInflater.inflate(R.layout.actionbar_two, null);
         mTitleTextView = (TextView) mCustomView.findViewById(R.id.title_text);
         mTitleTextView.setText("Add a new class");
-        back = (ImageView)mCustomView.findViewById(R.id.imageView1);
-        createClass = (Button)findViewById(R.id.button);
+        back = (ImageView) mCustomView.findViewById(R.id.imageView1);
+        createClass = (Button) findViewById(R.id.button);
         mActionBar.setCustomView(mCustomView);
         mActionBar.setDisplayShowCustomEnabled(true);
-        backCovering = (TextView)mCustomView.findViewById(R.id.backCovering);
+        backCovering = (TextView) mCustomView.findViewById(R.id.backCovering);
         backCovering.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     backCovering.setBackground(new ColorDrawable(0xFFc0392b));
                 }
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     backCovering.setBackgroundColor(Color.TRANSPARENT);
                 }
                 return false;
@@ -69,88 +69,37 @@ public class CreateClass extends Activity {
             @Override
             public void onClick(View v) {
                 className.setText("");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        className = (EditText)findViewById(R.id.name);
-//        uw_w = (TextView)findViewById(R.id.weighted);
-//        mybox = (CheckBox)findViewById(R.id.checkBox);
-//        mybox.setChecked(true);
-//        mybox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked){
-//                    uw_w.setText("Grades Weighted");
-//                }else{
-//                    uw_w.setText("Grades Unweighted");
-//                }
-//            }
-//        });
+        className = (EditText) findViewById(R.id.name);
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 className.setText("");
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        back.setOnTouchListener( new View.OnTouchListener() {
+        back.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     backCovering.setBackground(new ColorDrawable(0xFFc0392b));
                 }
-                if(event.getAction() == MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     backCovering.setBackgroundColor(Color.TRANSPARENT);
                 }
 
                 return true;
             }
         });
-        createClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(className.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Please make sure add a class name",
-                            Toast.LENGTH_SHORT).show();
-
-                }else{
-                    JSONObject myclass = new JSONObject();
-                    try {
-                        myclass.put("Name", className.getText().toString());
-                        myclass.put("Weighted", false);
-                        jsonstring = myclass.toString();
-                        Set<String> ss = new HashSet<String>();
-                        SharedPreferences sharedPref = getSharedPreferences("grades.xml",MODE_PRIVATE);
-                        Set<String> old = sharedPref.getStringSet("Grades",ss);
-                        Log.i("Set",old.toString());
-                        SharedPreferences.Editor ed = sharedPref.edit();
-                        if(old.isEmpty()){
-                            Set<String> grades = new HashSet<String>();
-                            grades.add(jsonstring);
-                            ed.putStringSet("Grades", grades);
-                            Log.i("New Set",grades.toString());
-                            ed.apply();
-                        }else{
-                            old.add(jsonstring);
-                            ed.remove("Grades");
-                            ed.putStringSet("Grades",old);
-                            Log.i("New Set",old.toString());
-                            ed.apply();
-
-                        }
-
-
-                    }catch (JSONException j){
-                        Log.i(j.toString(), j.toString());
-                    }
-                    Toast.makeText(getApplicationContext(),"Class created",
-                            Toast.LENGTH_LONG).show();
-
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                }
-            }
-        });
     }
+
+    /**
+     *  Insert the OnClickListener code for createClass here!!!
+     *
+     **/
 
 
     @Override

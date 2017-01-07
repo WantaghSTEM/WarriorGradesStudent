@@ -92,42 +92,29 @@ public class GradesActivity extends Activity {
                 predictButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!gradeWanted.getText().toString().isEmpty() && !predictTotal.getText().toString().isEmpty() && isNumericDouble(predictTotal.getText().toString().trim().replaceAll("\\s+","")) && isNumericDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""))){
-                            double predictTotalInt = Double.parseDouble(predictTotal.getText().toString());
-                            double predictTotalGrade = Double.parseDouble(gradeWanted.getText().toString());
-                            if(predictTotalInt > 0 && predictTotalGrade>=0) {
-                                double numberNeeded = 0;
-                                double gradeWantedDouble = Double.parseDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""));
-                                int predictedTotalInt = Integer.parseInt(predictTotal.getText().toString());
-                                numberNeeded = (gradeWantedDouble / 100) * (runningTotal + predictedTotalInt) - (runningCorrect);
-                                DecimalFormat f = new DecimalFormat("##.00");
+                        // This line checks to make sure the user filled out the form correctly
+                        if(!gradeWanted.getText().toString().isEmpty() && !predictTotal.getText().toString().isEmpty() && isNumericDouble(predictTotal.getText().toString().trim().replaceAll("\\s+","")) && isNumericDouble(gradeWanted.getText().toString().trim().replaceAll("\\s+", ""))) {
 
-                                SingleGrade tempgrade = new SingleGrade();
-                                tempgrade.setPointsRight((int) numberNeeded);
-                                tempgrade.setTotalPoints(predictedTotalInt);
-                                Toast.makeText(getApplicationContext(), "The points you would need would be:  " + f.format(numberNeeded) + ". The percentage you would need on the test would be a: " + tempgrade.getPercentage(),
-                                        Toast.LENGTH_LONG).show();
-                                predictDialog.dismiss();
-                            }else{
-                                if(predictTotalGrade < 0){
-                                    Toast.makeText(getApplicationContext(), "Nice try but you can't have a negative grade :) .",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                                else if(predictTotalInt<=0){
-                                    Toast.makeText(getApplicationContext(), "Nice try but you can't have an assignment which is worth less than or equal to 0 points :) .",
-                                            Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Please fill out all the fields properly",
-                                    Toast.LENGTH_SHORT).show();
+                            // This one is the number we put in the first box
+                            double predictTotalInt = Double.parseDouble(predictTotal.getText().toString());
+
+                            // This one is the number we put in the second box
+                            double predictTotalGrade = Double.parseDouble(gradeWanted.getText().toString());
+
+                            // This is how we make some text show up on the bottom of the screen
+                            Toast.makeText(getApplicationContext(), "Oh no we haven't implemented this yet!", Toast.LENGTH_LONG).show();
+
+                            // YOUR CODE SHOULD GO BETWEEN HERE
+
+                            //////////
+
+                            // AND HERE
                         }
                     }
                 });
-
-
             }
         });
+
         myPredictCovering.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -373,70 +360,8 @@ public class GradesActivity extends Activity {
 
     }
     public void createGrade(){
-         addGrade = new Dialog(this);
-        addGrade.setTitle("Add a new grade");
-        addGrade.setContentView(R.layout.create_grade_layout);
-        addGrade.show();
-        assignmentName = (EditText)addGrade.findViewById(R.id.assignment);
-        pointsCorrect = (EditText)addGrade.findViewById(R.id.pointscorrect);
-        totalPoints = (EditText)addGrade.findViewById(R.id.totalpoints);
 
-        Button submit =(Button)addGrade.findViewById(R.id.button);
-        submit.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(totalPoints.getText().toString().isEmpty() || pointsCorrect.getText().toString().isEmpty() || assignmentName.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please fill out all the fields properly",
-                            Toast.LENGTH_SHORT).show();
-
-                }else if(!isNumeric(totalPoints.getText().toString()) || !isNumeric(pointsCorrect.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Please make sure your point values are numbers",
-                            Toast.LENGTH_SHORT).show();
-
-                }else if(Integer.parseInt(totalPoints.getText().toString()) <= 0){
-                    Toast.makeText(getApplicationContext(), "Please make sure your total points are not less than or equal to zero",
-                            Toast.LENGTH_SHORT).show();
-                }else if(Integer.parseInt(pointsCorrect.getText().toString()) < 0){
-                    Toast.makeText(getApplicationContext(), "Please make sure your points correct are greater than or equal to zero",
-                            Toast.LENGTH_SHORT).show();
-                }else {
-
-                    Toast.makeText(getApplicationContext(), "Grade Added",
-                            Toast.LENGTH_SHORT).show();
-                    String aName = assignmentName.getText().toString();
-                    aName = aName.trim();
-//                    aName = aName.replaceAll("\\s+","");
-                    String pCorrect = pointsCorrect.getText().toString();
-                    String tPoints = totalPoints.getText().toString();
-                    SharedPreferences sharedPreferences = getSharedPreferences("grades.xml", MODE_PRIVATE);
-                    String className = mTitleTextView.getText().toString();
-                    Set<String> grades = sharedPreferences.getStringSet(className, new HashSet<String>());
-                    if(grades.isEmpty()){
-                        Set<String> gradesSet = new TreeSet<String>();
-                        gradesSet.add(aName + ">" + pCorrect + "/" + tPoints );
-                        SharedPreferences.Editor ed = sharedPreferences.edit();
-                        ed.putStringSet(className,gradesSet);
-                        ed.apply();
-                        Log.i("What","is going on");
-                        populateListView();
-                    }else{
-                        SharedPreferences.Editor ed = sharedPreferences.edit();
-                        grades.add(aName + ">" + pCorrect + "/" + tPoints);
-                        ed.remove(className);
-                        ed.commit();
-                        Log.i("Grades Array Added",grades.toString());
-                        ed.putStringSet(className,grades);
-                        ed.apply();
-                        Log.i("It","is going on");
-
-                        populateListView();
-                    }
-                    addGrade.cancel();
-                }
-
-            }
-        });
-
+        // YOU WILL BE WRITING CODE TO CREATE THE DIALOG HERE!!!
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
